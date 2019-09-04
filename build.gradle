@@ -1,10 +1,11 @@
 plugins {
-    id 'java'
     id 'java-library'
-    id 'maven-publish'
+    id 'maven'
+    id 'signing'
 }
 
 group 'com.github'
+archivesBaseName = "dependency-inject"
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -12,6 +13,71 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Dependency Inject'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Dependency Injection Annotation'
+                url 'http://www.example.com/example-application'
+
+                scm {
+                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
+                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
+                    url 'http://foo.googlecode.com/svn/trunk/'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'manfred'
+                        name 'Saptarshi Chatterjee'
+                        email 'saptarshichatterjee1@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'

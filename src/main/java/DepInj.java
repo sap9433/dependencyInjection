@@ -1,9 +1,11 @@
-public class DepInj {
-    public void print(){
-        System.out.println(" I do work");
-    }
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    public static void main(String[] args) {
-        new DepInj().print();
-    }
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface DepInj {
+
 }
