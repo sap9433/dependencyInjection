@@ -6,7 +6,7 @@ plugins {
 
 group 'com.github.sap9433'
 archivesBaseName = "dependency-inject"
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = 1.8
 
@@ -46,7 +46,7 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Dependency Inject'
+                name 'dependency-inject'
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'Dependency Injection Annotation'
@@ -67,7 +67,7 @@ uploadArchives {
 
                 developers {
                     developer {
-                        id 'manfred'
+                        id 'sapy'
                         name 'Saptarshi Chatterjee'
                         email 'saptarshichatterjee1@gmail.com'
                     }

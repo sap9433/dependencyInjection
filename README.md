@@ -15,3 +15,4 @@ Only way was to ass spring jars to our dependency . Which we didn't want . So wr
 - Create a [gpg key](https://central.sonatype.org/pages/working-with-pgp-signatures.html) . (brew install gpg2 , gpg --gen-key, gpg --list-keys, gpg --keyserver hkp://pool.sks-keyservers.net --send-keys CCB2F39ADC112552658A3EA60A1189B4C4B4D83B)
 - Follow [this](https://central.sonatype.org/pages/gradle.html) to generate build.gradle.
 - create gradle.properties in your root and add to .gitignore.[Add secret](https://docs.gradle.org/current/userguide/signing_plugin.html)
+- gradle uploadArchives
