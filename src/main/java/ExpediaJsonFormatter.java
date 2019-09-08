@@ -5,9 +5,9 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonSerializer {
+public class ExpediaJsonFormatter {
 
-	public String serialize(Object object) throws JsonSerializeException {
+	public String expediaJsonString(Object object) throws PrintingException {
 		
 		try {
 			Class<?> objectClass = requireNonNull(object).getClass();
@@ -15,19 +15,20 @@ public class JsonSerializer {
 			
 			for (Field field: objectClass.getDeclaredFields()) {
 				field.setAccessible(true);
-				if (field.isAnnotationPresent(JsonField.class)) {
-					jsonElements.put(getSerializedKey(field), (String) field.get(object));
+				if (field.isAnnotationPresent(IncludePrint.class)) {
+					jsonElements.put(getJsonKey(field), field.get(object).toString());
 				}
 			}
 			System.out.println(toJsonString(jsonElements));
 			return toJsonString(jsonElements);
 		}
 		catch (IllegalAccessException e) {
-			throw new JsonSerializeException(e.getMessage());
+			throw new PrintingException(e.getMessage());
 		}
 	}
 
 	private String toJsonString(Map<String, String> jsonMap) {
+
 		String elementsString = jsonMap.entrySet()
 		        .stream()
 		        .map(entry -> "\""  + entry.getKey() + "\":\"" + entry.getValue() + "\"")
@@ -35,8 +36,8 @@ public class JsonSerializer {
 		return "{" + elementsString + "}";
 	}
 	
-	private static String getSerializedKey(Field field) {
-		String annotationValue = field.getAnnotation(JsonField.class).value();
+	private static String getJsonKey(Field field) {
+		String annotationValue = field.getAnnotation(IncludePrint.class).value();
 		
 		if (annotationValue.isEmpty()) {
 			return field.getName();

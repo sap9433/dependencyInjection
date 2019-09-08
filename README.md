@@ -1,13 +1,16 @@
-# Dependency Injection
-A lightweight java plugin to inject dependency . Useful, if your project is not a spring boot project , and you still want to leverage the power of DI without adding the full fled-get spring-core jar . 
+# Custom Object to JsonMapper
+
+A lightweight java plugin to convert object to a customized JSON String. 
 
 ## Possible uses
+We often need to log objects for performance , security and data analysis. While logging we need to make
+sure we inadvertently doesn't print secure information , also often there are organizational
+requirement to log data in certain custom format . Lets say there is a requirement that if there is a field called `ip`,  while printing it json key should be `ipv4`. And it's tough to enforce those guidelines to different project
+across the organization. This light weight project takes care of that.
 
-We were working on a Spark application using java . we wanted to leverage dependency injection . Noticed there is no stand alone jar for that ,
-Only way was to ass spring jars to our dependency . Which we didn't want . So wrote this stand alone jar.
+## Usage guide 
 
-
-## Steps for publishing -
+## Steps for publishing (For Contributor of the project only ) -
 
 - Create an [account](https://issues.sonatype.org/secure/Signup!default.jspa)
 - Create a new Sonatype Open Source Project Repository Hosting [OSSRH](https://issues.sonatype.org/secure/CreateIssue.jspa)
@@ -16,3 +19,5 @@ Only way was to ass spring jars to our dependency . Which we didn't want . So wr
 - Follow [this](https://central.sonatype.org/pages/gradle.html) to generate build.gradle.
 - create gradle.properties in your root and add to .gitignore.[Add secret](https://docs.gradle.org/current/userguide/signing_plugin.html)
 - gradle uploadArchives
+- Dont forget to remove snapshot from version , 
+
