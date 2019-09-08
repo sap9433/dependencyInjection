@@ -1,4 +1,4 @@
-# Custom Object to JsonMapper
+# Custom Object to Json Converter
 
 A lightweight java plugin to convert object to a customized JSON String. 
 
@@ -18,6 +18,18 @@ across the organization. This light weight project takes care of that.
 - Create a [gpg key](https://central.sonatype.org/pages/working-with-pgp-signatures.html) . (brew install gpg2 , gpg --gen-key, gpg --list-keys, gpg --keyserver hkp://pool.sks-keyservers.net --send-keys CCB2F39ADC112552658A3EA60A1189B4C4B4D83B)
 - Follow [this](https://central.sonatype.org/pages/gradle.html) to generate build.gradle.
 - create gradle.properties in your root and add to .gitignore.[Add secret](https://docs.gradle.org/current/userguide/signing_plugin.html)
+```$xslt
+signing.keyId=C4B4D83B  #(gpg --list-keys , last 8 digit )
+signing.password=z_*** #(password that you used to sign keys)
+signing.secretKeyRingFile=/Users/<ur machine username>/.gnupg/secring.gpg
+ossrhUsername=sapy
+ossrhPassword=<ossrhpassword from google key chain>
+```
 - gradle uploadArchives
 - Dont forget to remove snapshot from version , 
+- Now go to (https://oss.sonatype.org/#stagingRepositories) , select your repository , check, and click on close. It takes some time to close.
+- Once you have successfully closed the staging repository, you can release it by pressing the Release button. This will move the components into the release repository of OSSRH where it will be synced to the Central Repository.
+- If some of the guideline fails you will see the steps that failed in Red. and 'Release' button will not be activated
+- Last 3 steps are well documented [here](https://central.sonatype.org/pages/gradle.html) and [here](https://central.sonatype.org/pages/releasing-the-deployment.html)
+- After 10 minutes to 2hrs . Your changes will reflect [search.maven.org](https://search.maven.org/artifact/com.github.sap9433/dependency-inject/1.0/jar).
 

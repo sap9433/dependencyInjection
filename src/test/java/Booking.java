@@ -8,7 +8,6 @@ public class Booking {
     private List<String> dontPrint;
 
     public Booking(long bookingId, String description, List<String> dontPrint) {
-
         this.bookingId = bookingId;
         this.description = description;
         this.dontPrint = dontPrint;
