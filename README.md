@@ -1,6 +1,6 @@
 # Custom Object to Json Converter
 
-A lightweight java plugin to convert object to a customized JSON String. 
+A lightweight java plugin to convert object to a customized JSON String. Available in [MVN Central](https://mvnrepository.com/artifact/com.github.sap9433/dependency-inject).
 
 ## Possible uses
 We often need to log objects for performance , security and data analysis. While logging we need to make
